@@ -24,6 +24,9 @@ This application provides a "Prediction Hub" with three separate ML-powered pred
 
 ## 📁 Project Structure
 . ├── .gitignore # Tells Git what to ignore ├── app.py # The main Flask application ├── process_ipl_data.py # ETL script: creates the win summary ├── train_model.py # Trains the winner prediction model ├── train_score_model.py # Trains the score prediction model ├── train_toss_model.py # Trains the toss prediction model ├── requirements.txt # All Python dependencies │ ├── ipl_matches_2008_2025.csv # (Ignored by Git) The raw dataset │ ├── /templates │ └── index.html # The frontend HTML file │ └── # (Generated Files - Ignored by Git) ├── model.pkl ├── encoder.pkl ├── score_model.pkl ├── toss_model.pkl └── team_win_summary.csv
+ 
+
+  
 
 ## 🏃 How to Run This Project
 
