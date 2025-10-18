@@ -22,8 +22,7 @@ This application provides a "Prediction Hub" with three separate ML-powered pred
 * **Machine Learning:** Scikit-learn (Logistic Regression, Linear Regression)
 * **Frontend:** HTML, CSS, JavaScript (Chart.js)
 
-## 📁 Project Structure
-. ├── ipl_matches_2008_2025.csv (The raw dataset you must download) ├── process_ipl_data.py (ETL script: creates the win summary) ├── train_model.py (Trains the winner prediction model) ├── train_score_model.py (Trains the score prediction model) ├── train_toss_model.py (Trains the toss prediction model) ├── app.py (The main Flask application that runs the server) ├── requirements.txt (All Python dependencies) └── /templates └── index.html (The frontend HTML file for the dashboard)
+## 📁 Project Structure. ├── ipl_matches_2008_2025.csv (The raw dataset you must download) ├── process_ipl_data.py (ETL script: creates the win summary) ├── train_model.py (Trains the winner prediction model) ├── train_score_model.py (Trains the score prediction model) ├── train_toss_model.py (Trains the toss prediction model) ├── app.py (The main Flask application that runs the server) ├── requirements.txt (All Python dependencies) └── /templates └── index.html (The frontend HTML file for the dashboard)
 
 
 ## 🏃 How to Run This Project
