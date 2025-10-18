@@ -1,15 +1,16 @@
 from flask import Flask, render_template, jsonify, request
 import pandas as pd
 import joblib
+import json
 import warnings
 
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
 
-DATA_FILE = 'ipl_matches_2008_2025.csv'
 SUMMARY_FILE = 'team_win_summary.csv'
 
+ 
 try:
     winner_model = joblib.load('model.pkl')
     winner_encoder = joblib.load('encoder.pkl')
@@ -27,6 +28,7 @@ try:
 except FileNotFoundError:
     toss_model = None
 
+ 
 try:
     df_summary = pd.read_csv(SUMMARY_FILE)
     all_teams = sorted(df_summary['team'].unique())
@@ -34,10 +36,10 @@ except FileNotFoundError:
     all_teams = ["Data file not found"]
 
 try:
-    df_full = pd.read_csv(DATA_FILE, low_memory=False)
-    all_venues = sorted(df_full['venue'].dropna().unique())
+    with open('venues.json', 'r') as f:
+        all_venues = json.load(f)
 except FileNotFoundError:
-    all_venues = ["Data file not found"]
+    all_venues = ["Venue file not found"]
 
 
 @app.route('/')
@@ -60,10 +62,10 @@ def get_win_data():
 @app.route('/api/toss_data')
 def get_toss_data():
     try:
-        df = pd.read_csv(DATA_FILE, low_memory=False)
-        match_df = df.drop_duplicates(subset=['match_id'])
-        toss_counts = match_df['toss_decision'].value_counts()
-        return jsonify(toss_counts.to_dict())
+         
+        with open('toss_data.json', 'r') as f:
+            toss_counts = json.load(f)
+        return jsonify(toss_counts)
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -76,11 +78,9 @@ def predict_winner():
         data = request.get_json()
         team1 = data['team1']
         team2 = data['team2']
-
-         
+        
         sorted_input = sorted([team1, team2])
         input_df = pd.DataFrame([sorted_input], columns=['team1', 'team2'])
-         
         
         input_encoded = winner_encoder.transform(input_df)
 
